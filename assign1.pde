@@ -10,7 +10,12 @@ int h = 50;
 // declare variables
 // --------------------------------------------
 // put your code inside here
-int totalScore = 0;
+
+int fruit_num;
+int fruit_score;
+int totalScore = 500;
+int [] fruitCount = {0,0,0,0,0,0};
+int [] randomNumber = {0,0,0};
 
 // --------------------------------------------
 
@@ -48,9 +53,18 @@ void draw() {
       // start rolling
       // -------------------------------------------------
       // put your code inside here
+      totalScore =totalScore-50;
       
-      
-      // -------------------------------------------------
+      for (int mm=0;mm<3;mm++){
+        randomNumber[mm]=0;
+      //fruit_num = int(random(6));
+      //machine.setSlotFruit(mm,fruit_num);
+      //totalScore = totalScore + machine.getSlotScore(fruit_num);
+      }
+      for (int mm=0;mm<6;mm++){
+        fruitCount[mm]=0;
+      }  
+      //----------------------------------
     }
     machine.roll();
     textSize(19);
@@ -62,8 +76,22 @@ void draw() {
       // stop rolling
       // -------------------------------------------------
       // put your code inside here
-      
- 
+      for (int mm=0;mm<3;mm++){
+      double ran_num;
+        ran_num = random(1);
+        if (ran_num<=pow(1.0/10.0,1.0/3.0) ){
+            fruit_num = 0; 
+        }
+        else { 
+            fruit_num= int (random(1,5));
+        }
+      fruitCount[fruit_num]=fruitCount[fruit_num]+1;
+      randomNumber[mm]=fruit_num;
+      machine.setSlotFruit(mm,fruit_num);     
+    }
+      for (int nn=0;nn<6;nn++){
+      totalScore= totalScore + machine.getSlotScore(nn)*fruitCount[nn]*fruitCount[nn];
+      } 
  
  
       
@@ -83,7 +111,6 @@ void mousePressed() {
     button = !button;
   }  
 }
-
 
 
 
